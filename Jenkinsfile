@@ -12,7 +12,11 @@ pipeline{
   }
   stage('Terraform apply'){
     steps{
-      sh 'terraform apply --auto-approve'
+      sh '''
+      export AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}
+      export AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}
+      terraform apply --auto-approve
+      '''
     }
   }
  }
